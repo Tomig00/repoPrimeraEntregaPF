@@ -30,7 +30,7 @@ routerCarrito.get('/:id/productos', function(req, res){
     const num = req.params.id
             if (isNaN(num))
             {
-                res.json({ error : 'el parametro no es un numero' })
+                res.json({ error : 'El parametro no es un numero entero' })
             }else{
                 id = parseInt(num)
             const test = new ContenedorCarrito()
