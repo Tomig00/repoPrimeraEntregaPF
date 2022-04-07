@@ -7,7 +7,7 @@ class Contenedor{
     save(producto){
         let arregloOld = []
         let idMayor = 0
-
+        let tiempo = Date()
         if (fs.readFileSync("./productos.txt", "utf-8") !== ""){
             arregloOld = JSON.parse(fs.readFileSync("./productos.txt", "utf-8"))
         }
@@ -20,6 +20,7 @@ class Contenedor{
             }else break
         }
         producto.id = idMayor + 1
+        producto.timestamp = tiempo.toString()
         arregloOld.push(producto)
 
         let productoJSON = JSON.stringify(arregloOld)
@@ -244,7 +245,7 @@ class ContenedorCarrito{
             }else break
         }
         carrito.id = idMayor + 1
-        carrito.time = time.toString()
+        carrito.timestamp = time.toString()
         carrito.producto = []
         arregloOld.push(carrito)
 
@@ -565,5 +566,4 @@ class ContenedorCarrito{
 
 }
 
-module.exports = Contenedor
-module.exports = ContenedorCarrito
+module.exports = {Contenedor, ContenedorCarrito}

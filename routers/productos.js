@@ -1,5 +1,5 @@
 const express = require('express')
-const Contenedor = require('../api')
+const {Contenedor} = require('../api')
 const routerProductos = express.Router()
 
 let producto = new Object()
@@ -31,7 +31,7 @@ routerProductos.get('/:id', (req, res) => {
 
 
 routerProductos.post('/', function(req, res, next){
-
+    
     if (req.query.admin == 1){
         console.log("Se conecto un admin")
         
@@ -40,15 +40,18 @@ routerProductos.post('/', function(req, res, next){
         res.send({ error: "No se logeo como admin"})
     }
 }, (req, res) => { 
+    
     const test = new Contenedor()
-    console.log(req.body.title)
-        producto.title = req.body.title
-        producto.price = req.body.price
-        producto.thumbnail = req.body.thumbnail
-        
-        console.log(producto)
-        let id = test.save(producto)
-        res.json({productoAgregadoConId: `${id}`})
+    producto.title = req.body.title
+    producto.price = req.body.price
+    producto.foto = req.body.foto
+    producto.descripcion = req.body.descripcion
+    producto.codigo = req.body.codigo
+    producto.stock = req.body.stock
+    
+    
+    let id = test.save(producto)
+    res.json({productoAgregadoConId: `${id}`})
     }
 );
 
@@ -72,10 +75,12 @@ routerProductos.put('/:id', function(req, res, next){
     }else{
         let id = parseInt(num)
         
-        console.log(id)
         producto.title = req.body.title
         producto.price = req.body.price
-        producto.thumbnail = req.body.thumbnail
+        producto.foto = req.body.foto
+        producto.descripcion = req.body.descripcion
+        producto.codigo = req.body.codigo
+        producto.stock = req.body.stock
         
         test.changeById(id, producto).then(function(result) {
             res.json({result})

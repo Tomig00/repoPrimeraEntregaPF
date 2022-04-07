@@ -1,5 +1,5 @@
 const express = require('express')
-const ContenedorCarrito = require('../api')
+const {ContenedorCarrito} = require('../api')
 const routerCarrito = express.Router()
 
 let carrito = new Object()
